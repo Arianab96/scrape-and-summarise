@@ -9,6 +9,12 @@
 
 <h1>Web Scraping App</h1>
 <p>Paste a URL below to extract and summarize content.</p>
+<form [formGroup]="urlForm" (ngSubmit)="onSubmit()">
+  <label for="url">Enter URL:</label>
+  <input id="url" formControlName="url" />
+
+  <button type="submit" [disabled]="urlForm.invalid">Scrape</button>
+</form>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
