@@ -1,7 +1,10 @@
 import express from 'express';
+import scrapeRoutes from './scrape'
 
 const app = express();
 const PORT = 3000;
+
+app.use('/api', scrapeRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World! Your Express server is running.');
