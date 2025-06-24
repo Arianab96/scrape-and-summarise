@@ -9,12 +9,53 @@
 
 <h1>Web Scraping App</h1>
 <p>Paste a URL below to extract and summarize content.</p>
+
 <form [formGroup]="urlForm" (ngSubmit)="onSubmit()">
   <label for="url">Enter URL:</label>
   <input id="url" formControlName="url" />
 
-  <button type="submit" [disabled]="urlForm.invalid">Scrape</button>
+  <button type="submit" [disabled]="urlForm.invalid || isLoading">
+    {{ isLoading ? 'Scraping...' : 'Scrape' }}
+  </button>
 </form>
+
+<!-- Loading message -->
+ 
+<div *ngIf="isLoading" class="loading-message">
+  <p>Scraping content, please wait...</p>
+</div>
+
+<!-- Error message -->
+
+<div *ngIf="error" class="error-message">
+  <h3>Error</h3>
+  <p>{{ error }}</p>
+</div>
+
+<!-- Results -->
+
+<div *ngIf="results" class="results-container">
+  <h3>Scraped Content</h3>
+
+
+<div class="results-box">
+  <h4>Title:</h4>
+  <p class="title"><strong>{{ results.title }}</strong></p>
+
+
+<h4>Content Preview:</h4>
+<p class="content-preview">
+  {{ results.content }}
+</p>
+
+<div *ngIf="results.summary" class="summary-section">
+  <h4>Summary:</h4>
+  <p class="summary">
+    {{ results.summary }}
+  </p>
+</div>
+</div>
+</div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
