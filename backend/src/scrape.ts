@@ -1,9 +1,10 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import puppeteer from 'puppeteer';
 
 const router = express.Router()
 
-router.post('/scrape', async (req: Request, res: Response) => {
+// @ts-ignore
+router.post('/scrape', async (req, res) => {
   try {
   const userUrl = req.body.url
 
