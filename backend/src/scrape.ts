@@ -1,7 +1,44 @@
 import express from 'express';
 import puppeteer from 'puppeteer';
+import fetch from 'node-fetch';
+import dotenv from 'dotenv';
 
-const router = express.Router()
+dotenv.config();
+const router = express.Router();
+
+async function summarizeText(text: string): Promise<string> {
+  try {
+    const response = await fetch(
+      'https://api-inference.huggingface.co/models/facebook/bart-large-cnn',
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          inputs: text.substring(0, 1024),
+          parameters: {
+            max_length: 150,
+            min_length: 50,
+            do_sample: false,
+          },
+        }),
+      }
+    );
+
+
+    const result = await response.json() as any;
+    if (result[0]?.summary_text) {
+      return result[0].summary_text;
+    } else {
+      return 'Summary could not be generated.';
+    }
+  } catch (error) {
+    console.error('Summarization error:', error);
+    return 'Summary unavailable due to error.';
+  }
+}
 
 // @ts-ignore
 router.post('/scrape', async (req, res) => {
@@ -35,11 +72,14 @@ router.post('/scrape', async (req, res) => {
  // Close the browser
   await browser.close();
 
+  const summary = await summarizeText(content);
+
   res.json({
     success:true,
     data: {
       title: title,
-      content: content
+      content: content,
+      summary: summary
     }
   });
 
