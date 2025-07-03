@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const router = express.Router();
 
-async function summarizeText(text: string): Promise<string> {
+async function summariseText(text: string): Promise<string> {
   try {
     const response = await fetch(
       'https://api-inference.huggingface.co/models/facebook/bart-large-cnn',
@@ -35,7 +35,7 @@ async function summarizeText(text: string): Promise<string> {
       return 'Summary could not be generated.';
     }
   } catch (error) {
-    console.error('Summarization error:', error);
+    console.error('Summarisation error:', error);
     return 'Summary unavailable due to error.';
   }
 }
@@ -72,7 +72,7 @@ router.post('/scrape', async (req, res) => {
  // Close the browser
   await browser.close();
 
-  const summary = await summarizeText(content);
+  const summary = await summariseText(content);
 
   res.json({
     success:true,
