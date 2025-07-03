@@ -11,7 +11,7 @@ import { ScraperService } from './services/scraper.service';
   styleUrl: './web-scraper-form.component.scss'
 })
 export class WebScraperFormComponent {
-  title = 'web-scraping-app';
+  title = 'scrape-and-summarise';
 
   isLoading = false;
   results: any = null;

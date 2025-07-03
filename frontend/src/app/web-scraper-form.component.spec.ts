@@ -14,16 +14,16 @@ describe('WebScraperFormComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'web-scraping-app' title`, () => {
+  it(`should have the 'scrape-and-summarise' title`, () => {
     const fixture = TestBed.createComponent(WebScraperFormComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('web-scraping-app');
+    expect(app.title).toEqual('scrape-and-summarise');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(WebScraperFormComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, web-scraping-app');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, scrape-and-summarise');
   });
 });
