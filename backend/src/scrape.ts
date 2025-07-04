@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const router = express.Router();
 
-async function summariseText(text: string): Promise<string> {
+async function summarizeText(text: string): Promise<string> {
   try {
     const response = await fetch(
       'https://api-inference.huggingface.co/models/facebook/bart-large-cnn',
@@ -72,7 +72,7 @@ router.post('/scrape', async (req, res) => {
  // Close the browser
   await browser.close();
 
-  const summary = await summariseText(content);
+  const summary = await summarizeText(content);
 
   res.json({
     success:true,
