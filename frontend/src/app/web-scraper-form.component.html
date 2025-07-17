@@ -1,26 +1,28 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<div class="container">
+  <div class="header">
+     <h1>Welcome to your personal web scraper!</h1>
+     <p>Paste a URL to begin scraping and create your summary 🚀</p>
+  </div>
 
-<h1>Web Scraping App</h1>
-<p>Paste a URL below to extract and summarize content.</p>
+  <div class="main-content">
+    <div class="input-section">
+     <form class="form-group" [formGroup]="urlForm" (ngSubmit)="onSubmit()">
+      <label for="url">Enter URL:</label>
+      <div class="input-container">
+      <input id="url" class="url-input" formControlName="url" placeholder="https://example.com"/>
 
-<form [formGroup]="urlForm" (ngSubmit)="onSubmit()">
-  <label for="url">Enter URL:</label>
-  <input id="url" formControlName="url" />
-
-  <button type="submit" [disabled]="urlForm.invalid || isLoading">
-    {{ isLoading ? 'Scraping...' : 'Scrape' }}
-  </button>
-</form>
+      <button class="submit-btn" id="scrapeBtn" type="submit" [disabled]="urlForm.invalid || isLoading">
+        {{ isLoading ? 'Scraping...' : 'Scrape' }}
+      </button>
+      </div>
+      <div class="validation-message" id="validationMessage"></div>
+    </form>
+    </div>
+  </div>
+</div>
 
 <!-- Loading message -->
- 
+
 <div *ngIf="isLoading" class="loading-message">
   <p>Scraping content, please wait...</p>
 </div>
@@ -56,14 +58,5 @@
 </div>
 </div>
 </div>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 
 <router-outlet />
