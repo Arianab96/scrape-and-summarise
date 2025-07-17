@@ -1,59 +1,26 @@
-# WebScrapingApp
+# Scrape and summarise 📝
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+## Overview 
 
-## Development server
+This is a full-stack web application that allows users to extract content from any URL and generates summaries using AI. 
 
-To start a local development server, run:
+## How it's made 
 
-```bash
-ng serve
-```
+<ins> Tech Used </ins>
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+* Angular
+* Node.js
+* Express.js
+* TypeScript
+* Puppeteer
+* Hugging Face API
 
-## Code scaffolding
+The app consists of an Angular frontend and a Node.js/Express backend. Users paste a URL into the form, and the backend scrapes the page content using Puppeteer. The scraped text is then sent to the Hugging Face Inference API, which uses the BART model to generate a summary of the content. The results, which include the page title, a content preview and the AI-generated summary, are displayed in the browser. 
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Optimisations
 
-```bash
-ng generate component component-name
-```
+Implement caching mechanism to store previously scraped content and avoid re-scraping the same URLs. Add rate limiting to prevent API abuse and manage costs. Implement batch processing for multiple URLs simultaneously. Add support for different AI models based on content type (news vs academic vs social media). Create a Chrome extension version for one-click summarization while browsing. Implement content classification to automatically adjust summarization parameters. Add user accounts to save scraping history. 
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Learnings
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Separating route handlers into dedicated files (scrape.ts) keeps the main server file (index.ts) clean and focused on configuration, making the codebase more maintainable and easier to test individual features. AI API integration requires careful consideration of rate limits and token usage, especially on free tiers, making content length optimization crucial.
