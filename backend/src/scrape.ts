@@ -2,6 +2,8 @@ import express from 'express';
 import puppeteer from 'puppeteer';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
+import { Readability } from '@mozilla/readability';
+import { JSDOM } from 'jsdom';
 
 dotenv.config();
 const router = express.Router();
@@ -65,19 +67,44 @@ router.post('/scrape', async (req, res) => {
   const title = await page.title();
 
   // Get the page content
-  const content = await page.evaluate(() => {
-    return document.body.innerText;
-  });
+  const htmlContent = await page.content();
 
  // Close the browser
   await browser.close();
+
+  const dom = new JSDOM(htmlContent, { url: userUrl });
+
+  const document = dom.window.document;
+
+  const reader = new Readability(document);
+  const article = reader.parse();
+
+  let content = '';
+    let extractedTitle = title;
+    let metadata = {};
+
+  if (article) {
+      content = article.textContent || '';
+      extractedTitle = article.title || title;
+      metadata = {
+        byline: article.byline,
+        excerpt: article.excerpt,
+        length: article.length,
+        siteName: article.siteName,
+        publishedTime: article.publishedTime
+      };
+    } else {
+      content = document.body.textContent || '';
+    }
+
+  dom.window.close();
 
   const summary = await summarizeText(content);
 
   res.json({
     success:true,
     data: {
-      title: title,
+      title: extractedTitle,
       content: content,
       summary: summary
     }
