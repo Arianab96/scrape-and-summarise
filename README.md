@@ -1,6 +1,10 @@
 # Scrape and summarise 📝
 
-![Demo](./assets/demo.gif)
+## Demo
+
+<a href="https://www.loom.com/share/255653b15d714da4a5cf49b8c74ead2c">
+  <img src="https://cdn.loom.com/sessions/thumbnails/255653b15d714da4a5cf49b8c74ead2c-e242390ca53fae5f-full-play.gif" width="600" alt="Demo Video">
+</a>
 
 ## Overview 
 
