@@ -1,5 +1,7 @@
 # Scrape and summarise 📝
 
+![Demo](./assets/demo.gif)
+
 ## Overview 
 
 This is a full-stack web application that allows users to extract content from any URL and generates summaries using AI. 
