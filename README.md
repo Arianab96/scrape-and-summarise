@@ -8,6 +8,10 @@
 
 This is a full-stack web application that allows users to extract content from any URL and generates summaries using AI. 
 
+## Architecture Overview
+
+![Architecture Overview](./assets/architecture-overview.png)
+
 ## How it's made 
 
 <ins> Tech Used </ins>
